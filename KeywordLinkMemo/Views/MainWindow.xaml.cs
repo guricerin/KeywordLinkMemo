@@ -11,5 +11,11 @@ namespace KeywordLinkMemo.Views
         {
             InitializeComponent();
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var exepath = System.AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\');
+            MessageBox.Show(exepath);
+        }
     }
 }
