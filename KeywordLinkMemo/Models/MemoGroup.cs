@@ -1,21 +1,29 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace KeywordLinkMemo.Models
 {
     public class MemoGroup
     {
-        public string Name { get; set; }
+        public string DirPath { get; }
 
-        public List<MemoGroup> MemoNames { get; set; }
+        public string Name { get { return Path.GetFileName(DirPath); } }
 
-        public MemoGroup(string name)
+        public ObservableCollection<MemoItem> MemoItems { get; set; } = new ObservableCollection<MemoItem>();
+
+        public MemoGroup(string path)
         {
-            Name = name;
-            MemoNames = new List<MemoGroup>();
+            DirPath = path;
+        }
+
+        public void AddItem(string memoFilePath)
+        {
+            MemoItems.Add(new MemoItem(memoFilePath));
         }
     }
 }

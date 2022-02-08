@@ -5,8 +5,11 @@
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="600" Width="800">
     <DockPanel>
-        <Menu DockPanel.Dock="Top">
+        <Menu
+            DockPanel.Dock="Top">
             <MenuItem Header="グループ">
+                <MenuItem Header="選択" Click="MenuItem_Click"/>
+                <Separator />
                 <MenuItem Header="新規作成" Click="MenuItem_Click"/>
                 <Separator />
                 <MenuItem Header="削除" Click="MenuItem_Click"/>
@@ -20,14 +23,37 @@
             </MenuItem>
         </Menu>
 
-        <TreeView DockPanel.Dock="Left" x:Name="MemoGroupsTreeView" ItemsSource="{Binding MemoGroups}">
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate DataType="local:Models.MemoGroup"
-                                  ItemsSource="{Binding MemoNames}">
-                    <TextBlock Text="{Binding Name}"/>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>
+        <DockPanel
+            Width="200"
+            Background="AliceBlue"
+            LastChildFill="True"
+            DockPanel.Dock="Left"
+            x:Name="MemoListContainer">
+            
+            <TextBlock
+                DockPanel.Dock="Top"
+                Text="{Binding SelectedMemoGroup.Name}"/>
+            
+            <ListView
+                Width="{Binding ActualWidth, ElementName=MemoListContainer}"
+                DockPanel.Dock="Bottom"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                ItemsSource="{Binding SelectedMemoGroup.MemoItems}">
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock
+                            Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+        </DockPanel>
         
         <ContentControl prism:RegionManager.RegionName="ContentRegion" />
     </DockPanel>

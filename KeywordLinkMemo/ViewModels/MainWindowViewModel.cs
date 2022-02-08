@@ -1,4 +1,6 @@
 using Prism.Mvvm;
+using Prism.Commands;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,10 +23,25 @@ namespace KeywordLinkMemo.ViewModels
             get { return _memosPath; }
         }
 
-        private List<Models.MemoGroup> _memoGroups = new List<Models.MemoGroup>();
-        public List<Models.MemoGroup> MemoGroups
+        private ObservableCollection<Models.MemoGroup> _memoGroups = new ObservableCollection<Models.MemoGroup>();
+        public ObservableCollection<Models.MemoGroup> MemoGroups
         {
             get { return _memoGroups; }
+            set { SetProperty(ref _memoGroups, value); }
+        }
+
+        private Models.MemoGroup _selectedMemoGroup;
+        public Models.MemoGroup SelectedMemoGroup
+        {
+            get { return _selectedMemoGroup; }
+            set { SetProperty(ref _selectedMemoGroup, value); }
+        }
+
+        private Models.MemoItem _selectedMemoItem;
+        public Models.MemoItem SelectedMemoItem
+        {
+            get { return _selectedMemoItem; }
+            set { SetProperty(ref _selectedMemoItem, value); }
         }
         #endregion
 
@@ -37,23 +54,24 @@ namespace KeywordLinkMemo.ViewModels
                 Directory.CreateDirectory(sample);
                 File.Create(Path.Combine(sample, "index"));
                 File.Create(Path.Combine(sample, "01.txt"));
+                File.Create(Path.Combine(sample, "サンプルめも.txt"));
             }
 
-            UpdateMemoGroupsTreeView();
+            UpdateMemoGroups();
+            _selectedMemoGroup = _memoGroups[0];
         }
 
-        public void UpdateMemoGroupsTreeView()
+        public void UpdateMemoGroups()
         {
-            foreach(var dirPath in Directory.GetDirectories(MemosPath))
+            // いまのところ、グループ（ディレクトリ）は1階層目にしか存在しない想定。
+            foreach (var dirPath in Directory.GetDirectories(MemosPath))
             {
-                var dirName = Path.GetFileName(dirPath);
-                var memoGroup = new Models.MemoGroup(dirName);
+                var memoGroup = new Models.MemoGroup(dirPath);
                 foreach(var filePath in Directory.GetFiles(dirPath))
                 {
                     if(Path.GetExtension(filePath) == ".txt")
                     {
-                        var fileName = Path.GetFileNameWithoutExtension(filePath);
-                        memoGroup.MemoNames.Add(new Models.MemoGroup(fileName));
+                        memoGroup.AddItem(filePath);
                     }
                 }
                 _memoGroups.Add(memoGroup);
@@ -61,6 +79,17 @@ namespace KeywordLinkMemo.ViewModels
         }
 
         #region command
+        private DelegateCommand _selectMemoItemCommand;
+        public DelegateCommand SelectMemoItemCommand
+        {
+            get
+            {
+                return _selectMemoItemCommand = _selectMemoItemCommand ?? new DelegateCommand(() =>
+                {
+
+                });
+            }
+        }
         #endregion
     }
 }
