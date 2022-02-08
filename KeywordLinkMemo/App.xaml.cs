@@ -1,4 +1,5 @@
-﻿using KeywordLinkMemo.Views;
+using KeywordLinkMemo.Views;
+using KeywordLinkMemo.ViewModels;
 using Prism.Ioc;
 using Prism.Modularity;
 using System.Windows;
@@ -17,7 +18,7 @@ namespace KeywordLinkMemo
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.RegisterDialog<SelectMemoGroupWindow>();
         }
     }
 }

@@ -8,11 +8,11 @@
         <Menu
             DockPanel.Dock="Top">
             <MenuItem Header="グループ">
-                <MenuItem Header="選択" Click="MenuItem_Click"/>
+                <MenuItem Header="選択" Click="SelectMemoGroup_Click"/>
                 <Separator />
-                <MenuItem Header="新規作成" Click="MenuItem_Click"/>
+                <MenuItem Header="新規作成"/>
                 <Separator />
-                <MenuItem Header="削除" Click="MenuItem_Click"/>
+                <MenuItem Header="削除" />
             </MenuItem>
             <MenuItem Header="項目">
                 <MenuItem Header="開いている項目を編集" />
