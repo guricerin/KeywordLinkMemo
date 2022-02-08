@@ -27,14 +27,14 @@
             HorizontalAlignment="Center"
             Orientation="Horizontal">
             <Button
-                Width="50"
-                Height="20"
+                Width="60"
+                Height="25"
                 Margin="5,5,5,5"
                 Content="決定"
                 Click="DecisionButton_Click"/>
             <Button
-                Width="50"
-                Height="20"
+                Width="60"
+                Height="25"
                 Margin="5,5,5,5"
                 Content="キャンセル"
                 Click="CancelButton_Click"/>

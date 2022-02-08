@@ -10,7 +10,7 @@
             <MenuItem Header="グループ">
                 <MenuItem Header="選択" Click="SelectMemoGroup_Click"/>
                 <Separator />
-                <MenuItem Header="新規作成"/>
+                <MenuItem Header="新規作成" Click="CreateMemoGroup_Click"/>
                 <Separator />
                 <MenuItem Header="削除" />
             </MenuItem>

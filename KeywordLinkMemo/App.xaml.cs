@@ -19,6 +19,7 @@ namespace KeywordLinkMemo
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterDialog<SelectMemoGroupWindow>();
+            containerRegistry.RegisterDialog<CreateMemoGroupWindow>();
         }
     }
 }

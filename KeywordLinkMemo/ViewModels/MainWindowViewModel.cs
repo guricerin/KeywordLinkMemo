@@ -63,6 +63,8 @@ namespace KeywordLinkMemo.ViewModels
 
         public void UpdateMemoGroups()
         {
+            _memoGroups.Clear();
+
             // いまのところ、グループ（ディレクトリ）は1階層目にしか存在しない想定。
             foreach (var dirPath in Directory.GetDirectories(MemosPath))
             {
