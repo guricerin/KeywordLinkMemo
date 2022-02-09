@@ -17,7 +17,7 @@
             <MenuItem Header="項目">
                 <MenuItem Header="開いている項目を編集" />
                 <Separator />
-                <MenuItem Header="新規作成" />
+                <MenuItem Header="新規作成" Click="CreateMemoItem_Click"/>
                 <Separator />
                 <MenuItem Header="削除" />
             </MenuItem>

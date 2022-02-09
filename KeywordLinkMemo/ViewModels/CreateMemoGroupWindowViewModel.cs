@@ -8,7 +8,12 @@ namespace KeywordLinkMemo.ViewModels
 {
     public class CreateMemoGroupWindowViewModel : BindableBase
     {
-        public string MemoGroupName { get; set; } = "";
+        private string _memoGroupName;
+        public string MemoGroupName
+        {
+            get => _memoGroupName;
+            set => SetProperty(ref _memoGroupName, value);
+        }
 
         public CreateMemoGroupWindowViewModel()
         {

@@ -9,6 +9,8 @@ namespace KeywordLinkMemo.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
+        public const string INDEX_FILE_NAME = "index";
+
         #region property
         private string _memosPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\'), "memos");
         public string MemosPath
@@ -45,7 +47,7 @@ namespace KeywordLinkMemo.ViewModels
                 Directory.CreateDirectory(MemosPath);
                 var sample = Path.Combine(MemosPath, "最初のグループ");
                 Directory.CreateDirectory(sample);
-                File.Create(Path.Combine(sample, "index"));
+                File.Create(Path.Combine(sample, INDEX_FILE_NAME));
                 File.Create(Path.Combine(sample, "01.txt"));
                 File.Create(Path.Combine(sample, "サンプルめも.txt"));
             }
@@ -73,6 +75,18 @@ namespace KeywordLinkMemo.ViewModels
             }
         }
 
+        public void UpdateSelectedMemoGroup()
+        {
+            SelectedMemoGroup.Clear();
+            foreach (var filePath in Directory.GetFiles(SelectedMemoGroup.DirPath))
+            {
+                if (Path.GetExtension(filePath) == ".txt")
+                {
+                    SelectedMemoGroup.AddItem(filePath);
+                }
+            }
+        }
+
         public void DeleteMemoGroup(Models.MemoGroup group)
         {
             if (SelectedMemoGroup.Name == group.Name)
@@ -81,6 +95,13 @@ namespace KeywordLinkMemo.ViewModels
             }
             _memoGroups.Remove(group);
             Directory.Delete(group.DirPath);
+        }
+
+        public void UpdateIndexFile(string memoItemName)
+        {
+            var path = Path.Combine(SelectedMemoGroup.DirPath, INDEX_FILE_NAME);
+            // ファイルが存在しない場合は作成してくれる。
+            File.AppendAllText(path, memoItemName + Environment.NewLine);
         }
 
         #region command

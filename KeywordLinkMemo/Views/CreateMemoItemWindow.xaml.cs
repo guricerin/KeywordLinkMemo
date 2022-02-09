@@ -1,38 +1,39 @@
 using KeywordLinkMemo.ViewModels;
 using System.Windows;
-using System.IO;
 
 namespace KeywordLinkMemo.Views
 {
-    public interface ICreateMemoGroupNameReceiver
+    public interface ICreateMemoItemNameReceiver
     {
-        void ReceiveCreateMemoGroupName(string name);
+        void ReceiveCreateMemoItemName(string name);
     }
 
     /// <summary>
-    /// Interaction logic for CreateMemoGroupWindow.xaml
+    /// Interaction logic for CreateMemoItemWindow.xaml
     /// </summary>
-    public partial class CreateMemoGroupWindow : Window
+    public partial class CreateMemoItemWindow : Window
     {
-        private ICreateMemoGroupNameReceiver _receiver;
+        private ICreateMemoItemNameReceiver _receiver;
 
-        public CreateMemoGroupWindow(ICreateMemoGroupNameReceiver receiver)
+        public CreateMemoItemWindow(ICreateMemoItemNameReceiver receiver, string memoGroupName)
         {
             InitializeComponent();
 
             _receiver = receiver;
+            var vm = (CreateMemoItemWindowViewModel)DataContext;
+            vm.MemoGroupName = memoGroupName;
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            var vm = (CreateMemoGroupWindowViewModel)DataContext;
-            var name = vm.MemoGroupName;
+            var vm = (CreateMemoItemWindowViewModel)DataContext;
+            var name = vm.MemoItemName;
             if (name == "")
             {
                 MessageBox.Show("空欄にはできません。", "", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            _receiver.ReceiveCreateMemoGroupName(name);
+            _receiver.ReceiveCreateMemoItemName(name);
             Close();
         }
 

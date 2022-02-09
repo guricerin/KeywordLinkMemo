@@ -60,6 +60,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CreateMemoItemWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DeleteMemoGroupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -79,9 +83,13 @@
     <Compile Include="Models\MemoGroup.cs" />
     <Compile Include="Models\MemoItem.cs" />
     <Compile Include="ViewModels\CreateMemoGroupWindowViewModel.cs" />
+    <Compile Include="ViewModels\CreateMemoItemWindowViewModel.cs" />
     <Compile Include="ViewModels\DeleteMemoGroupWindowViewModel.cs" />
     <Compile Include="Views\CreateMemoGroupWindow.xaml.cs">
       <DependentUpon>CreateMemoGroupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateMemoItemWindow.xaml.cs">
+      <DependentUpon>CreateMemoItemWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DeleteMemoGroupWindow.xaml.cs">
       <DependentUpon>DeleteMemoGroupWindow.xaml</DependentUpon>

@@ -7,7 +7,7 @@ namespace KeywordLinkMemo.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, ISelectedMemoGroupReceiver, ICreateMemoGroupNameReceiver, IDeleteMemoGroupReceiver
+    public partial class MainWindow : Window, ISelectedMemoGroupReceiver, ICreateMemoGroupNameReceiver, IDeleteMemoGroupReceiver, ICreateMemoItemNameReceiver
     {
         public MainWindow()
         {
@@ -43,8 +43,8 @@ namespace KeywordLinkMemo.Views
             else
             {
                 Directory.CreateDirectory(path);
-                MessageBox.Show("作成しました。", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 vm.UpdateMemoGroups();
+                MessageBox.Show("作成しました。", "", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -67,5 +67,36 @@ namespace KeywordLinkMemo.Views
             var vm = (MainWindowViewModel)DataContext;
             MessageBox.Show(vm.SelectedMemoItem.Name);
         }
+
+        private void CreateMemoItem_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = (MainWindowViewModel)DataContext;
+            if (vm.SelectedMemoGroup == null)
+            {
+                MessageBox.Show("グループを選択してください。", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            var win = new CreateMemoItemWindow(this, vm.SelectedMemoGroup.Name);
+            win.ShowDialog();
+        }
+
+        public void ReceiveCreateMemoItemName(string name)
+        {
+            var vm = (MainWindowViewModel)DataContext;
+            var path = Path.Combine(vm.SelectedMemoGroup.DirPath, name);
+            path = $"{path}.txt";
+            if (File.Exists(path))
+            {
+                MessageBox.Show("指定の項目はすでに存在しています。", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            else
+            {
+                File.Create(path);
+                vm.UpdateIndexFile(name);
+                vm.UpdateSelectedMemoGroup();
+                MessageBox.Show("作成しました。", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
     }
 }

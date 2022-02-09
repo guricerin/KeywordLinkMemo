@@ -25,5 +25,10 @@ namespace KeywordLinkMemo.Models
         {
             MemoItems.Add(new MemoItem(memoFilePath));
         }
+
+        public void Clear()
+        {
+            MemoItems.Clear();
+        }
     }
 }
