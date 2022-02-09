@@ -22,7 +22,6 @@ namespace KeywordLinkMemo.Views
         {
             InitializeComponent();
 
-            //DataContext = new DeleteMemoGroupWindowViewModel();
             _receiver = receiver;
             var vm = (DeleteMemoGroupWindowViewModel)DataContext;
             vm.MemoGroups = memoGroups;

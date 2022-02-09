@@ -19,7 +19,7 @@
                 <Separator />
                 <MenuItem Header="新規作成" Click="CreateMemoItem_Click"/>
                 <Separator />
-                <MenuItem Header="削除" />
+                <MenuItem Header="削除" Click="DeleteMemoItem_Click"/>
             </MenuItem>
         </Menu>
 

@@ -97,11 +97,38 @@ namespace KeywordLinkMemo.ViewModels
             Directory.Delete(group.DirPath, true);
         }
 
-        public void UpdateIndexFile(string memoItemName)
+        public void AppendIndexFile(string memoItemName)
         {
             var path = Path.Combine(SelectedMemoGroup.DirPath, INDEX_FILE_NAME);
             // ファイルが存在しない場合は作成してくれる。
             File.AppendAllText(path, memoItemName + Environment.NewLine);
+        }
+
+        public void DeleteItemInIndexFile(Models.MemoItem item)
+        {
+            var path = Path.Combine(SelectedMemoGroup.DirPath, INDEX_FILE_NAME);
+            var lines = new List<string>();
+            foreach (var line in File.ReadLines(path))
+            {
+                var l = line.Trim();
+                if (l != item.Name)
+                {
+                    lines.Add(l);
+                }
+            }
+            var s = string.Join("\n", lines);
+            File.WriteAllText(path, s);
+        }
+
+        public void DeleteMemoItem(Models.MemoItem item)
+        {
+            if (SelectedMemoItem?.Name == item.Name)
+            {
+                SelectedMemoItem = null;
+            }
+            DeleteItemInIndexFile(item);
+            SelectedMemoGroup.DeleteItem(item);
+            File.Delete(item.FilePath);
         }
 
         #region command

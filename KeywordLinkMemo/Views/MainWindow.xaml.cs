@@ -7,7 +7,7 @@ namespace KeywordLinkMemo.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, ISelectedMemoGroupReceiver, ICreateMemoGroupNameReceiver, IDeleteMemoGroupReceiver, ICreateMemoItemNameReceiver
+    public partial class MainWindow : Window, ISelectedMemoGroupReceiver, ICreateMemoGroupNameReceiver, IDeleteMemoGroupReceiver, ICreateMemoItemNameReceiver, IDeleteMemoItemReceiver
     {
         public MainWindow()
         {
@@ -74,7 +74,7 @@ namespace KeywordLinkMemo.Views
             var vm = (MainWindowViewModel)DataContext;
             if (vm.SelectedMemoGroup == null)
             {
-                MessageBox.Show("グループを選択してください。", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("作成項目を含めるグループを選択してください。", "", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             var win = new CreateMemoItemWindow(this, vm.SelectedMemoGroup.Name);
@@ -93,11 +93,29 @@ namespace KeywordLinkMemo.Views
             else
             {
                 File.Create(path);
-                vm.UpdateIndexFile(name);
+                vm.AppendIndexFile(name);
                 vm.UpdateSelectedMemoGroup();
                 MessageBox.Show("作成しました。", "", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
+        private void DeleteMemoItem_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = (MainWindowViewModel)DataContext;
+            if (vm.SelectedMemoGroup == null)
+            {
+                MessageBox.Show("削除したい項目が含まれるグループを選択してください。", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            var win = new DeleteMemoItemWindow(this, vm.SelectedMemoGroup);
+            win.ShowDialog();
+        }
+
+        public void ReceiveDeleteMemoItem(Models.MemoItem item)
+        {
+            var vm = (MainWindowViewModel)DataContext;
+            vm.DeleteMemoItem(item);
+            MessageBox.Show("削除しました。", "", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 }
