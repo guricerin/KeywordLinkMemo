@@ -8,6 +8,9 @@ using System.Collections.ObjectModel;
 
 namespace KeywordLinkMemo.Models
 {
+    /// <summary>
+    /// 実態は <exeディレクトリ>/memo/<グループ名> ディレクトリ
+    /// </summary>
     public class MemoGroup
     {
         public string DirPath { get; }
