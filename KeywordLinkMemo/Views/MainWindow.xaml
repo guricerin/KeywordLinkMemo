@@ -39,12 +39,14 @@
                 DockPanel.Dock="Bottom"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                ItemsSource="{Binding SelectedMemoGroup.MemoItems}">
+                ItemsSource="{Binding SelectedMemoGroup.MemoItems}"
+                SelectedItem="{Binding SelectedMemoItem}"
+                SelectionChanged="MemoItemsListView_SelectionChanged">
                 
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextBlock
-                            Text="{Binding Name}"/>
+                            Text="{Binding Name}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
                 <ListView.ItemContainerStyle>
@@ -55,6 +57,6 @@
             </ListView>
         </DockPanel>
         
-        <ContentControl prism:RegionManager.RegionName="ContentRegion" />
+        <ContentControl prism:RegionManager.RegionName="MemoItemRegion" />
     </DockPanel>
 </Window>

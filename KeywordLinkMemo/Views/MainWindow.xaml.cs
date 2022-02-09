@@ -61,5 +61,11 @@ namespace KeywordLinkMemo.Views
             vm.DeleteMemoGroup(group);
             MessageBox.Show("削除しました。", "", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
+        private void MemoItemsListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            var vm = (MainWindowViewModel)DataContext;
+            MessageBox.Show(vm.SelectedMemoItem.Name);
+        }
     }
 }
