@@ -10,7 +10,12 @@ namespace KeywordLinkMemo.ViewModels
 {
     public class SelectMemoGroupViewModel : BindableBase
     {
-        public ObservableCollection<Models.MemoGroup> MemoGroups { get; set; }
+        private ObservableCollection<Models.MemoGroup> _memoGroup;
+        public ObservableCollection<Models.MemoGroup> MemoGroups
+        {
+            get => _memoGroup;
+            set => SetProperty(ref _memoGroup, value);
+        }
 
         public SelectMemoGroupViewModel()
         {

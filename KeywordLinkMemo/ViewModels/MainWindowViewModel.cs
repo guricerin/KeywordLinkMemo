@@ -10,13 +10,6 @@ namespace KeywordLinkMemo.ViewModels
     public class MainWindowViewModel : BindableBase
     {
         #region property
-        private string _title = "KeywordLinkMemo";
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
-
         private string _memosPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\'), "memos");
         public string MemosPath
         {
@@ -82,6 +75,10 @@ namespace KeywordLinkMemo.ViewModels
 
         public void DeleteMemoGroup(Models.MemoGroup group)
         {
+            if (SelectedMemoGroup.Name == group.Name)
+            {
+                SelectedMemoGroup = null;
+            }
             _memoGroups.Remove(group);
             Directory.Delete(group.DirPath);
         }
