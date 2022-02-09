@@ -1,43 +1,38 @@
-using System;
-using System.Collections.Generic;
+using KeywordLinkMemo.ViewModels;
 using System.Collections.ObjectModel;
 using System.Windows;
-using KeywordLinkMemo.ViewModels;
-using Prism.Services.Dialogs;
 
 namespace KeywordLinkMemo.Views
 {
-    public interface ISelectedMemoGroupReceiver
+    public interface IDeleteMemoGroupReceiver
     {
-        void ReceiveSelectedMemoGroup(Models.MemoGroup group);
+        void ReceiveDeleteMemoGroup(Models.MemoGroup group);
     }
 
     /// <summary>
-    /// SelectMemoGroupWindow.xaml の相互作用ロジック
+    /// Interaction logic for DeleteMemoGroupWindow.xaml
     /// </summary>
-    public partial class SelectMemoGroupWindow : IDialogWindow
+    public partial class DeleteMemoGroupWindow : Window
     {
-        public IDialogResult Result { get; set; }
-
-        private ISelectedMemoGroupReceiver _receiver;
+        private IDeleteMemoGroupReceiver _receiver;
 
         private Models.MemoGroup _selectedMemoGroup;
 
-        public SelectMemoGroupWindow(ISelectedMemoGroupReceiver receiver, ObservableCollection<Models.MemoGroup> memoGroups)
+        public DeleteMemoGroupWindow(IDeleteMemoGroupReceiver receiver, ObservableCollection<Models.MemoGroup> memoGroups)
         {
             InitializeComponent();
 
-            DataContext = new SelectMemoGroupViewModel();
+            //DataContext = new DeleteMemoGroupWindowViewModel();
             _receiver = receiver;
-            var vm = (SelectMemoGroupViewModel)DataContext;
+            var vm = (DeleteMemoGroupWindowViewModel)DataContext;
             vm.MemoGroups = memoGroups;
         }
 
-        private void DecisionButton_Click(object sender, RoutedEventArgs e)
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             if (_selectedMemoGroup != null)
             {
-                _receiver.ReceiveSelectedMemoGroup(_selectedMemoGroup);
+                _receiver.ReceiveDeleteMemoGroup(_selectedMemoGroup);
                 Close();
             }
             else

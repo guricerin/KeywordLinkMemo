@@ -20,6 +20,7 @@ namespace KeywordLinkMemo
         {
             containerRegistry.RegisterDialog<SelectMemoGroupWindow>();
             containerRegistry.RegisterDialog<CreateMemoGroupWindow>();
+            containerRegistry.RegisterDialog<DeleteMemoGroupWindow>();
         }
     }
 }

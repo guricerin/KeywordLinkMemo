@@ -10,7 +10,7 @@ namespace KeywordLinkMemo.ViewModels
     public class MainWindowViewModel : BindableBase
     {
         #region property
-        private string _title = "Keyword Link Memo";
+        private string _title = "KeywordLinkMemo";
         public string Title
         {
             get { return _title; }
@@ -69,15 +69,21 @@ namespace KeywordLinkMemo.ViewModels
             foreach (var dirPath in Directory.GetDirectories(MemosPath))
             {
                 var memoGroup = new Models.MemoGroup(dirPath);
-                foreach(var filePath in Directory.GetFiles(dirPath))
+                foreach (var filePath in Directory.GetFiles(dirPath))
                 {
-                    if(Path.GetExtension(filePath) == ".txt")
+                    if (Path.GetExtension(filePath) == ".txt")
                     {
                         memoGroup.AddItem(filePath);
                     }
                 }
                 _memoGroups.Add(memoGroup);
             }
+        }
+
+        public void DeleteMemoGroup(Models.MemoGroup group)
+        {
+            _memoGroups.Remove(group);
+            Directory.Delete(group.DirPath);
         }
 
         #region command

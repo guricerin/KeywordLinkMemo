@@ -7,7 +7,7 @@ namespace KeywordLinkMemo.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, ISelectedMemoGroupReceiver, ICreateMemoGroupNameReceiver
+    public partial class MainWindow : Window, ISelectedMemoGroupReceiver, ICreateMemoGroupNameReceiver, IDeleteMemoGroupReceiver
     {
         public MainWindow()
         {
@@ -38,7 +38,7 @@ namespace KeywordLinkMemo.Views
             var path = Path.Combine(vm.MemosPath, name);
             if (Directory.Exists(path))
             {
-                MessageBox.Show("指定のグループ名はすでに存在しています。", "エラー", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("指定のグループ名はすでに存在しています。", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
             else
             {
@@ -46,6 +46,20 @@ namespace KeywordLinkMemo.Views
                 MessageBox.Show("作成しました。", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 vm.UpdateMemoGroups();
             }
+        }
+
+        private void DeleteMemoGroup_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = (MainWindowViewModel)DataContext;
+            var win = new DeleteMemoGroupWindow(this, vm.MemoGroups);
+            win.ShowDialog();
+        }
+
+        public void ReceiveDeleteMemoGroup(Models.MemoGroup group)
+        {
+            var vm = (MainWindowViewModel)DataContext;
+            vm.DeleteMemoGroup(group);
+            MessageBox.Show("削除しました。", "", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
