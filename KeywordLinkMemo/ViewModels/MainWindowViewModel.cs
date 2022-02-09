@@ -89,12 +89,12 @@ namespace KeywordLinkMemo.ViewModels
 
         public void DeleteMemoGroup(Models.MemoGroup group)
         {
-            if (SelectedMemoGroup.Name == group.Name)
+            if (SelectedMemoGroup?.Name == group.Name)
             {
                 SelectedMemoGroup = null;
             }
             _memoGroups.Remove(group);
-            Directory.Delete(group.DirPath);
+            Directory.Delete(group.DirPath, true);
         }
 
         public void UpdateIndexFile(string memoItemName)
