@@ -17,17 +17,12 @@ namespace KeywordLinkMemo.Models
 
         public string Name { get { return Path.GetFileNameWithoutExtension(FilePath); } }
 
-        public ObservableCollection<MemoItem> MemoNames { get; set; }
+        public string GroupName { get; }
 
         public MemoItem(string path)
         {
             FilePath = path;
-            MemoNames = new ObservableCollection<MemoItem>();
-        }
-
-        public void AddItem(string memoFilePath)
-        {
-            MemoNames.Add(new MemoItem(memoFilePath));
+            GroupName = Directory.GetParent(path).Name;
         }
     }
 }

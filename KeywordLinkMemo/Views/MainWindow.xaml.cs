@@ -24,6 +24,11 @@ namespace KeywordLinkMemo.Views
         public void ReceiveSelectedMemoGroup(Models.MemoGroup group){
             var vm = (MainWindowViewModel)DataContext;
             vm.SelectedMemoGroup = group;
+            if (vm.SelectedMemoItem?.GroupName != vm.SelectedMemoGroup.Name)
+            {
+                vm.SelectedMemoItem = null;
+                vm.NavigateToShowMemoItemPage();
+            }
         }
 
         private void CreateMemoGroup_Click(object sender, RoutedEventArgs e)
@@ -66,7 +71,7 @@ namespace KeywordLinkMemo.Views
         private void MemoItemsListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             var vm = (MainWindowViewModel)DataContext;
-            MessageBox.Show(vm.SelectedMemoItem.Name);
+            vm.NavigateToShowMemoItemPage();
         }
 
         private void CreateMemoItem_Click(object sender, RoutedEventArgs e)

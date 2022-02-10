@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Prism.Regions;
 
 namespace KeywordLinkMemo.ViewModels
 {
@@ -12,6 +13,9 @@ namespace KeywordLinkMemo.ViewModels
         public const string INDEX_FILE_NAME = "index";
 
         #region property
+        public IRegionManager RegionManager { get; }
+        public DelegateCommand<string> NavigateToShowmemoItemPageCommand { get; }
+
         private string _memosPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\'), "memos");
         public string MemosPath
         {
@@ -40,8 +44,14 @@ namespace KeywordLinkMemo.ViewModels
         }
         #endregion
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IRegionManager regionManager)
         {
+            RegionManager = regionManager;
+            NavigateToShowmemoItemPageCommand = new DelegateCommand<string>((string pageName) =>
+            {
+                RegionManager.RequestNavigate("MemoItemRegion", pageName);
+            });
+
             if (!Directory.Exists(MemosPath))
             {
                 Directory.CreateDirectory(MemosPath);
@@ -54,6 +64,20 @@ namespace KeywordLinkMemo.ViewModels
 
             UpdateMemoGroups();
             _selectedMemoGroup = _memoGroups[0];
+        }
+
+        public void NavigateToShowMemoItemPage()
+        {
+            //if (SelectedMemoItem == null) return;
+
+            var param = new NavigationParameters();
+            param.Add("MemoItem", SelectedMemoItem);
+            RegionManager.RequestNavigate("MemoItemRegion", nameof(Views.ShowMemoItemPage), param);
+        }
+
+        public void NavigateToBlankmemoItemPage()
+        {
+
         }
 
         public void UpdateMemoGroups()
