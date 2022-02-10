@@ -45,14 +45,7 @@ namespace KeywordLinkMemo.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             var memoItem = navigationContext.Parameters["MemoItem"] as Models.MemoItem;
-            if (memoItem == null)
-            {
-                Content = "";
-            }
-            else
-            {
-                Content = File.ReadAllText(memoItem.FilePath);
-            }
+            Content = File.ReadAllText(memoItem.FilePath);
         }
     }
 }

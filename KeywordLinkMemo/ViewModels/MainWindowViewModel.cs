@@ -68,11 +68,16 @@ namespace KeywordLinkMemo.ViewModels
 
         public void NavigateToShowMemoItemPage()
         {
-            //if (SelectedMemoItem == null) return;
+            if (SelectedMemoItem == null) return;
 
             var param = new NavigationParameters();
             param.Add("MemoItem", SelectedMemoItem);
             RegionManager.RequestNavigate("MemoItemRegion", nameof(Views.ShowMemoItemPage), param);
+        }
+
+        public void NavigateToBlankPage()
+        {
+            RegionManager.RequestNavigate("MemoItemRegion", nameof(Views.BlankPage));
         }
 
         public void NavigateToBlankmemoItemPage()

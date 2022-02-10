@@ -22,6 +22,7 @@ namespace KeywordLinkMemo
             containerRegistry.RegisterDialog<CreateMemoGroupWindow>();
             containerRegistry.RegisterDialog<DeleteMemoGroupWindow>();
 
+            containerRegistry.RegisterForNavigation<BlankPage>();
             containerRegistry.RegisterForNavigation<ShowMemoItemPage>();
         }
     }

@@ -24,10 +24,12 @@ namespace KeywordLinkMemo.Views
         public void ReceiveSelectedMemoGroup(Models.MemoGroup group){
             var vm = (MainWindowViewModel)DataContext;
             vm.SelectedMemoGroup = group;
+
+            // 項目を開いた状態で別グループを選択したときに、項目ページを初期化
             if (vm.SelectedMemoItem?.GroupName != vm.SelectedMemoGroup.Name)
             {
                 vm.SelectedMemoItem = null;
-                vm.NavigateToShowMemoItemPage();
+                vm.NavigateToBlankPage();
             }
         }
 
