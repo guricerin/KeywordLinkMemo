@@ -24,6 +24,7 @@ namespace KeywordLinkMemo
 
             containerRegistry.RegisterForNavigation<BlankPage>();
             containerRegistry.RegisterForNavigation<ShowMemoItemPage>();
+            containerRegistry.RegisterForNavigation<EditMemoItemPage>();
         }
     }
 }

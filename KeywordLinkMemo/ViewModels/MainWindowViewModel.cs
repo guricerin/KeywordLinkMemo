@@ -80,9 +80,13 @@ namespace KeywordLinkMemo.ViewModels
             RegionManager.RequestNavigate("MemoItemRegion", nameof(Views.BlankPage));
         }
 
-        public void NavigateToBlankmemoItemPage()
+        public void NavigateToEditMemoItemPage()
         {
+            if (SelectedMemoItem == null) return;
 
+            var param = new NavigationParameters();
+            param.Add("MemoItem", SelectedMemoItem);
+            RegionManager.RequestNavigate("MemoItemRegion", nameof(Views.EditMemoItemPage), param);
         }
 
         public void UpdateMemoGroups()

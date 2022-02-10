@@ -57,9 +57,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModels\BlankPageViewModel.cs" />
+    <Compile Include="ViewModels\EditMemoItemPageViewModel.cs" />
     <Compile Include="ViewModels\ShowMemoItemPageViewModel.cs" />
     <Compile Include="Views\BlankPage.xaml.cs">
       <DependentUpon>BlankPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditMemoItemPage.xaml.cs">
+      <DependentUpon>EditMemoItemPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShowMemoItemPage.xaml.cs">
       <DependentUpon>ShowMemoItemPage.xaml</DependentUpon>
@@ -81,6 +85,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DeleteMemoItemWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditMemoItemPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

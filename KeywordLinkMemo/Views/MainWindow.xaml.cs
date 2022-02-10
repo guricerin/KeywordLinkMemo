@@ -124,5 +124,16 @@ namespace KeywordLinkMemo.Views
             vm.DeleteMemoItem(item);
             MessageBox.Show("削除しました。", "", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
+        private void EditMemoItem_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = (MainWindowViewModel)DataContext;
+            if (vm.SelectedMemoItem == null)
+            {
+                MessageBox.Show("編集する項目を選択してください。", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            vm.NavigateToEditMemoItemPage();
+        }
     }
 }

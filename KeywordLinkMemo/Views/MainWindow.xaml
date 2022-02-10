@@ -15,7 +15,7 @@
                 <MenuItem Header="削除" Click="DeleteMemoGroup_Click"/>
             </MenuItem>
             <MenuItem Header="項目">
-                <MenuItem Header="開いている項目を編集" />
+                <MenuItem Header="開いている項目を編集" Click="EditMemoItem_Click"/>
                 <Separator />
                 <MenuItem Header="新規作成" Click="CreateMemoItem_Click"/>
                 <Separator />
