@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+using KeywordLinkMemo.ViewModels;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace KeywordLinkMemo.Views
 {
@@ -10,6 +12,19 @@ namespace KeywordLinkMemo.Views
         public EditMemoItemPage()
         {
             InitializeComponent();
+        }
+
+        private void SaveButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var vm = (EditMemoItemPageViewModel)DataContext;
+            vm.Save();
+            MessageBox.Show("上書きしました。", "", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void ReloadButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var vm = (EditMemoItemPageViewModel)DataContext;
+            vm.Reload();
         }
     }
 }

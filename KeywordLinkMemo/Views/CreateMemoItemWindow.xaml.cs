@@ -5,7 +5,7 @@ namespace KeywordLinkMemo.Views
 {
     public interface ICreateMemoItemNameReceiver
     {
-        void ReceiveCreateMemoItemName(string name);
+        bool ReceiveCreateMemoItemName(string name);
     }
 
     /// <summary>
@@ -28,13 +28,15 @@ namespace KeywordLinkMemo.Views
         {
             var vm = (CreateMemoItemWindowViewModel)DataContext;
             var name = vm.MemoItemName;
-            if (name == "")
+            if (string.IsNullOrEmpty(name))
             {
                 MessageBox.Show("空欄にはできません。", "", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            _receiver.ReceiveCreateMemoItemName(name);
-            Close();
+            if (_receiver.ReceiveCreateMemoItemName(name))
+            {
+                Close();
+            }
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

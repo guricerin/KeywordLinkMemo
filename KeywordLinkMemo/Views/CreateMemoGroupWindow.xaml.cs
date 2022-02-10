@@ -27,7 +27,7 @@ namespace KeywordLinkMemo.Views
         {
             var vm = (CreateMemoGroupWindowViewModel)DataContext;
             var name = vm.MemoGroupName;
-            if (name == "")
+            if (string.IsNullOrEmpty(name))
             {
                 MessageBox.Show("空欄にはできません。", "", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;

@@ -88,7 +88,7 @@ namespace KeywordLinkMemo.Views
             win.ShowDialog();
         }
 
-        public void ReceiveCreateMemoItemName(string name)
+        public bool ReceiveCreateMemoItemName(string name)
         {
             var vm = (MainWindowViewModel)DataContext;
             var path = Path.Combine(vm.SelectedMemoGroup.DirPath, name);
@@ -96,6 +96,7 @@ namespace KeywordLinkMemo.Views
             if (File.Exists(path))
             {
                 MessageBox.Show("指定の項目はすでに存在しています。", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return false;
             }
             else
             {
@@ -103,6 +104,7 @@ namespace KeywordLinkMemo.Views
                 vm.AppendIndexFile(name);
                 vm.UpdateSelectedMemoGroup();
                 MessageBox.Show("作成しました。", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                return true;
             }
         }
 

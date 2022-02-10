@@ -24,6 +24,8 @@ namespace KeywordLinkMemo.ViewModels
             set => SetProperty(ref _content, value);
         }
 
+        private string _prevContent;
+
         public EditMemoItemPageViewModel()
         {
 
@@ -33,6 +35,7 @@ namespace KeywordLinkMemo.ViewModels
         {
             MemoItem = navigationContext.Parameters["MemoItem"] as Models.MemoItem;
             Content = File.ReadAllText(MemoItem.FilePath);
+            _prevContent = Content;
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -43,6 +46,17 @@ namespace KeywordLinkMemo.ViewModels
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
             
+        }
+
+        public void Save()
+        {
+            File.WriteAllText(MemoItem.FilePath, Content);
+            _prevContent = Content;
+        }
+
+        public void Reload()
+        {
+            Content = _prevContent;
         }
     }
 }
