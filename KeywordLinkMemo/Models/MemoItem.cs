@@ -24,5 +24,10 @@ namespace KeywordLinkMemo.Models
             FilePath = path;
             GroupName = Directory.GetParent(path).Name;
         }
+
+        public string Content()
+        {
+            return File.ReadAllText(FilePath);
+        }
     }
 }

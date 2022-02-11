@@ -13,6 +13,8 @@ namespace KeywordLinkMemo.Models
     /// </summary>
     public class MemoGroup
     {
+        public const string INDEX_FILE_NAME = "index";
+
         public string DirPath { get; }
 
         public string Name { get { return Path.GetFileName(DirPath); } }
@@ -22,6 +24,13 @@ namespace KeywordLinkMemo.Models
         public MemoGroup(string path)
         {
             DirPath = path;
+            foreach (var filePath in Directory.GetFiles(path))
+            {
+                if (Path.GetExtension(filePath) == ".txt")
+                {
+                    AddItem(filePath);
+                }
+            }
         }
 
         public void AddItem(string memoFilePath)
@@ -34,9 +43,21 @@ namespace KeywordLinkMemo.Models
             MemoItems.Remove(item);
         }
 
-        public void Clear()
+        public void Reload()
         {
             MemoItems.Clear();
+            foreach (var filePath in Directory.GetFiles(DirPath))
+            {
+                if (Path.GetExtension(filePath) == ".txt")
+                {
+                    AddItem(filePath);
+                }
+            }
+        }
+
+        public List<string> MemoItemNames()
+        {
+            return MemoItems.Select(x => x.Name).ToList();
         }
     }
 }

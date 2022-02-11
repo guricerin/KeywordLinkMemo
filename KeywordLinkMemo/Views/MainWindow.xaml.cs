@@ -50,7 +50,7 @@ namespace KeywordLinkMemo.Views
             else
             {
                 Directory.CreateDirectory(path);
-                File.Create(Path.Combine(path, MainWindowViewModel.INDEX_FILE_NAME));
+                File.Create(Path.Combine(path, Models.MemoGroup.INDEX_FILE_NAME));
                 vm.UpdateMemoGroups();
                 MessageBox.Show("作成しました。", "", MessageBoxButton.OK, MessageBoxImage.Information);
             }
