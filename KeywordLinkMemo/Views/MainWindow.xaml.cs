@@ -50,7 +50,6 @@ namespace KeywordLinkMemo.Views
             else
             {
                 Directory.CreateDirectory(path);
-                File.Create(Path.Combine(path, Models.MemoGroup.INDEX_FILE_NAME));
                 vm.UpdateMemoGroups();
                 MessageBox.Show("作成しました。", "", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -100,8 +99,7 @@ namespace KeywordLinkMemo.Views
             }
             else
             {
-                File.Create(path);
-                vm.AppendIndexFile(name);
+                using (var info = File.Create(path)) { }
                 vm.UpdateSelectedMemoGroup();
                 MessageBox.Show("作成しました。", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 return true;

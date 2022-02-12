@@ -55,7 +55,6 @@ namespace KeywordLinkMemo.ViewModels
                 Directory.CreateDirectory(MemosPath);
                 var sample = Path.Combine(MemosPath, "最初のグループ");
                 Directory.CreateDirectory(sample);
-                File.Create(Path.Combine(sample, Models.MemoGroup.INDEX_FILE_NAME));
                 File.Create(Path.Combine(sample, "01.txt"));
                 File.Create(Path.Combine(sample, "サンプルめも.txt"));
             }
@@ -114,36 +113,12 @@ namespace KeywordLinkMemo.ViewModels
             Directory.Delete(group.DirPath, true);
         }
 
-        public void AppendIndexFile(string memoItemName)
-        {
-            var path = Path.Combine(SelectedMemoGroup.DirPath, Models.MemoGroup.INDEX_FILE_NAME);
-            // ファイルが存在しない場合は作成してくれる。
-            File.AppendAllText(path, memoItemName + Environment.NewLine);
-        }
-
-        public void DeleteItemInIndexFile(Models.MemoItem item)
-        {
-            var path = Path.Combine(SelectedMemoGroup.DirPath, Models.MemoGroup.INDEX_FILE_NAME);
-            var lines = new List<string>();
-            foreach (var line in File.ReadLines(path))
-            {
-                var l = line.Trim();
-                if (l != item.Name)
-                {
-                    lines.Add(l);
-                }
-            }
-            var s = string.Join("\n", lines);
-            File.WriteAllText(path, s);
-        }
-
         public void DeleteMemoItem(Models.MemoItem item)
         {
             if (SelectedMemoItem?.Name == item.Name)
             {
                 SelectedMemoItem = null;
             }
-            DeleteItemInIndexFile(item);
             SelectedMemoGroup.DeleteItem(item);
             File.Delete(item.FilePath);
         }

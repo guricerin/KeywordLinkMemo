@@ -13,8 +13,6 @@ namespace KeywordLinkMemo.Models
     /// </summary>
     public class MemoGroup
     {
-        public const string INDEX_FILE_NAME = "index";
-
         public string DirPath { get; }
 
         public string Name { get { return Path.GetFileName(DirPath); } }
