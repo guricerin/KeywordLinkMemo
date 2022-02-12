@@ -17,18 +17,11 @@ namespace KeywordLinkMemo.ViewModels
 
     public class ShowMemoItemPageViewModel : BindableBase, INavigationAware
     {
-        private string _title = "hoge";
+        private string _title = "";
         public string Title
         {
             get => _title;
             private set => SetProperty(ref _title, value);
-        }
-
-        private string _content;
-        public string Content
-        {
-            get => _content;
-            private set => SetProperty(ref _content, value);
         }
 
         /// <summary>
@@ -66,7 +59,6 @@ namespace KeywordLinkMemo.ViewModels
             var memoGroup = navigationContext.Parameters["MemoGroup"] as Models.MemoGroup;
             var memoItem = navigationContext.Parameters["MemoItem"] as Models.MemoItem;
             Title = memoItem.Name;
-            Content = File.ReadAllText(memoItem.FilePath);
 
             var ahoItem = new AhoItem { Group = memoGroup, Item = memoItem };
             _eventAggregator.GetEvent<PubSubEvent<AhoItem>>().Publish(ahoItem);

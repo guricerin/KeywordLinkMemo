@@ -19,13 +19,11 @@
                 Text="{Binding Title}"/>
 
         </Border>
-        
+
         <TextBlock
             Grid.Row="1"
             Margin="5,5,5,5"
-            Text="{Binding Content}"
-            x:Name="MemoItemTextBlock">
-            
-        </TextBlock>
+            x:Name="MemoItemTextBlock" />
+
     </Grid>
 </UserControl>
