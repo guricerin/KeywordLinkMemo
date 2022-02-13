@@ -127,19 +127,5 @@ namespace KeywordLinkMemo.ViewModels
             SelectedMemoGroup.DeleteItem(item);
             File.Delete(item.FilePath);
         }
-
-        #region command
-        private DelegateCommand _selectMemoItemCommand;
-        public DelegateCommand SelectMemoItemCommand
-        {
-            get
-            {
-                return _selectMemoItemCommand = _selectMemoItemCommand ?? new DelegateCommand(() =>
-                {
-
-                });
-            }
-        }
-        #endregion
     }
 }
