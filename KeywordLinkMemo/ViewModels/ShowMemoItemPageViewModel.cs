@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using Prism.Events;
+using System.Windows.Navigation;
 
 namespace KeywordLinkMemo.ViewModels
 {
@@ -24,6 +25,11 @@ namespace KeywordLinkMemo.ViewModels
             private set => SetProperty(ref _title, value);
         }
 
+        public Models.MemoGroup MemoGroup
+        {
+            get; private set;
+        }
+
         /// <summary>
         /// VMからViewを操作するための機能。
         /// </summary>
@@ -33,6 +39,8 @@ namespace KeywordLinkMemo.ViewModels
         {
             _eventAggregator = eventAggregator;
         }
+
+        public Action<Models.MemoItem> HyperlinkEvent { get; set; }
 
         /// <summary>
         /// true ：インスタンスを使いまわす(画面遷移してもコンストラクタ呼ばれない)
@@ -58,9 +66,12 @@ namespace KeywordLinkMemo.ViewModels
         {
             var memoGroup = navigationContext.Parameters["MemoGroup"] as Models.MemoGroup;
             var memoItem = navigationContext.Parameters["MemoItem"] as Models.MemoItem;
+            var hyperlink_navigate = navigationContext.Parameters["Hyperlink_RequestNavigate"] as Action<Models.MemoItem>;
+            MemoGroup = memoGroup;
             Title = memoItem.Name;
 
-            var ahoItem = new AhoItem { Group = memoGroup, Item = memoItem };
+            var ahoItem = new AhoItem { Group = memoGroup, Item = memoItem, };
+            HyperlinkEvent = hyperlink_navigate;
             _eventAggregator.GetEvent<PubSubEvent<AhoItem>>().Publish(ahoItem);
         }
     }

@@ -70,6 +70,11 @@ namespace KeywordLinkMemo.ViewModels
             var param = new NavigationParameters();
             param.Add("MemoGroup", SelectedMemoGroup);
             param.Add("MemoItem", SelectedMemoItem);
+            Action<Models.MemoItem> f = (x) =>
+            {
+                SelectedMemoItem = x;
+            };
+            param.Add("Hyperlink_RequestNavigate", f);
             RegionManager.RequestNavigate("MemoItemRegion", nameof(Views.ShowMemoItemPage), param);
         }
 

@@ -1,10 +1,12 @@
 using Ganss.Text;
 using KeywordLinkMemo.ViewModels;
 using Prism.Events;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Navigation;
 
 namespace KeywordLinkMemo.Views
 {
@@ -41,7 +43,9 @@ namespace KeywordLinkMemo.Views
                 {
                     if (l == results[resIdx].Index)
                     {
-                        var link = new Hyperlink { };
+                        // uriのホスト部分を遷移先の項目名とする。
+                        var link = new Hyperlink { NavigateUri = new Uri($"http://{results[resIdx].Word}") };
+                        link.RequestNavigate += Hyperlink_RequestNavigate;
                         link.Inlines.Add(new Run
                         {
                             Text = results[resIdx].Word,
@@ -77,6 +81,14 @@ namespace KeywordLinkMemo.Views
                     break;
                 }
             }
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            e.Handled = true;
+            var vm = (ShowMemoItemPageViewModel)DataContext;
+            var item = vm.MemoGroup.FetchItemByName(e.Uri.Host);
+            vm.HyperlinkEvent?.Invoke(item);
         }
     }
 }

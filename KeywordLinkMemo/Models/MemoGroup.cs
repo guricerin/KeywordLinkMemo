@@ -57,5 +57,17 @@ namespace KeywordLinkMemo.Models
         {
             return MemoItems.Select(x => x.Name).ToList();
         }
+
+        public MemoItem FetchItemByName(string name)
+        {
+            foreach(var item in MemoItems)
+            {
+                if (item.Name == name)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
     }
 }
