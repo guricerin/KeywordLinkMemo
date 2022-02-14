@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeywordLinkMemo", "KeywordLinkMemo\KeywordLinkMemo.csproj", "{E838B4E4-2C69-47DC-8508-798575C95E72}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EAC4893E-240E-4389-A1A7-1CF3BAC2022C}"
+	ProjectSection(SolutionItems) = preProject
+		KeywordLinkMemo\oss-license.txt = KeywordLinkMemo\oss-license.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
