@@ -55,7 +55,6 @@ namespace KeywordLinkMemo.ViewModels
                 Directory.CreateDirectory(MemosPath);
                 var sample = Path.Combine(MemosPath, "最初のグループ");
                 Directory.CreateDirectory(sample);
-                File.Create(Path.Combine(sample, "01.txt"));
                 File.Create(Path.Combine(sample, "サンプルめも.txt"));
             }
 
