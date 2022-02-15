@@ -2,6 +2,8 @@
 
 自動キーワードリンク機能付きのメモ用アプリ。  
 
+![demo](https://user-images.githubusercontent.com/38801778/153973667-545f7028-9ff4-4ea6-9675-3f93637450dc.gif)
+
 ## 依存
 
 - .NET Framework v4.7.2  
